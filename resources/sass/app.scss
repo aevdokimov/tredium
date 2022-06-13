@@ -1,0 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+@import 'variables';
+@import '~bootstrap/scss/bootstrap';
+
+.navbar-light .navbar-nav .nav-link.active {
+    border-bottom: 1px solid $indigo-400;
+}
