@@ -25,16 +25,3 @@
 
     <router-view :key="$route.fullPath"></router-view>
 </template>
-
-<script>
-
-export default {
-    mounted() {
-        if (localStorage.getItem("liked") === null) {
-            localStorage.setItem("liked", "");
-        }
-    }
-};
-</script>
-
-<style scoped></style>

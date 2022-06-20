@@ -5,7 +5,12 @@
     </button>
 </template>
 <script>
+import { useMainStore } from "../../store.js";
 export default {
+    setup() {
+        const store = useMainStore();
+        return { store };
+    },
     data() {
         return {
             localLikes: JSON.parse(JSON.stringify(this.likes)),
@@ -32,17 +37,15 @@ export default {
             this.like_processing = true;
 
             try {
-                var lsLiked = localStorage.getItem("liked");
                 if (this.liked) {
                     const response = await axios.get("/api/likes/unlike/" + this.articleId);                    
-                    lsLiked = lsLiked.replace('['+this.articleId+']', '');
+                    this.store.unlike(this.articleId);
                     this.localLikes--;              
                 } else {
                     const response = await axios.get("/api/likes/like/" + this.articleId);
-                    lsLiked += '['+this.articleId+']';
+                    this.store.like(this.articleId);
                     this.localLikes++;
                 }
-                localStorage.setItem("liked", lsLiked);
                 this.liked = !this.liked
             } catch (e) {
                 alert('Error');
@@ -52,7 +55,7 @@ export default {
         }
     },
     mounted() {
-        this.liked = localStorage.getItem("liked").includes('['+this.articleId+']');
+        this.liked = this.store.isLiked(this.articleId);
     }
 }
 </script>
