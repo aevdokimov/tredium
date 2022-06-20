@@ -5,13 +5,14 @@ namespace App\Services;
 use App\DTO\LikeDTO;
 use App\Models\Article;
 use App\Models\Like;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
 
 class LikeService {
     public function like (LikeDTO $DTO): void
     {
         if (!Article::where(['id' => $DTO->article_id])->exists()) {
-            return;
+            throw new ModelNotFoundException("Article #{$DTO->article_id} not found");
         }
 
         DB::transaction(function () use ($DTO) {
