@@ -6,6 +6,7 @@ use App\Models\Article;
 use App\Http\Resources\ArticleResource;
 use App\Http\Resources\ArticleThumbnailCollection;
 use App\Models\Tag;
+use App\Services\ArticleService;
 
 class ArticleController extends Controller
 {
@@ -41,10 +42,10 @@ class ArticleController extends Controller
         );
     }
 
-    public function addView(Article $article)
+    public function addView(Article $article, ArticleService $articleService)
     {
-        $article->increment('views');
+        $views = $articleService->addView($article->id);
 
-        return ['views' => $article->views];
+        return ['views' => $views];
     }
 }
