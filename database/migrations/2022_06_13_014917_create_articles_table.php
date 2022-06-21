@@ -22,7 +22,6 @@ return new class extends Migration
             $table->string("cover_url", 2048);
             $table->string("cover_thumbnail_url", 2048);
             $table->unsignedInteger('views')->default(0);
-            $table->unsignedInteger('likes')->default(0);
         });
     }
 

@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Models\Article;
+use App\Services\LikeService;
 
 class ArticleThumbnailResource extends JsonResource
 {
@@ -32,7 +33,7 @@ class ArticleThumbnailResource extends JsonResource
             'cover_url' => $this->cover_url,
             'cover_thumbnail_url' => $this->cover_thumbnail_url,
             'views' => $this->views,
-            'likes' => $this->likes
+            'likes' => (new LikeService)->getLikes($this->id)
         ];
     }
 }

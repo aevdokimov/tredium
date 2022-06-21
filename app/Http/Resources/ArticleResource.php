@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Models\Article;
+use App\Services\LikeService;
 
 class ArticleResource extends JsonResource
 {
@@ -26,7 +27,7 @@ class ArticleResource extends JsonResource
             'body' => $this->body,
             'cover_url' => $this->cover_url,
             'views' => $this->views,
-            'likes' => $this->likes,
+            'likes' => (new LikeService)->getLikes($this->id),
             'tags' => TagResource::collection($this->tags),
             'comments' => CommentResource::collection(
                 $this->comments()->orderBy('id', 'desc')->get()

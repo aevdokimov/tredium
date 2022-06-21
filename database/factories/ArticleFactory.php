@@ -37,8 +37,7 @@ class ArticleFactory extends Factory
                 .$this->faker->unique()->numberBetween(),
             'cover_thumbnail_url' => 'https://loremflickr.com/420/315?'
                 .$this->faker->unique()->numberBetween(),
-            'views' => $this->faker->numberBetween(0, 10000),
-            'likes' => $this->faker->numberBetween(0, 100)
+            'views' => $this->faker->numberBetween(0, 10000)
         ];
     }
 }
